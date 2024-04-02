@@ -14,20 +14,15 @@ function App() {
     }
   }, [userInput]);
 
-  const findSynonyms = async (input:string) => {
+  const findSynonyms = async (input: string) => {
     const url = `https://api.datamuse.com/words?ml=${input}`;
     try {
       const response = await fetch(url);
       const synonyms = await response.json();
       setSynonyms(synonyms);
-      console.log(synonyms);
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserInput(e.target.value);
   };
 
   const handleClick = () => {
@@ -38,7 +33,11 @@ function App() {
     <>
       <div>
         <form>
-          <input className="input" onChange={onChange}></input>
+          <input
+            value={userInput}
+            className="input"
+            onChange={(e) => setUserInput(e.target.value)}
+          ></input>
           <button className="button">find</button>
         </form>
         <div className="synonyms">
